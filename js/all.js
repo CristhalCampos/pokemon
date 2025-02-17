@@ -79,18 +79,18 @@ window.addEventListener('load', () => {
 
   const loadMoreBtn = document.getElementById("load-more");
   let offset = 1;
-  const limit = 36;
+  const limit = 12;
   const maxPokemon = 1010;
 
   //Llamar a la función para obtener los primeros 6 Pokemon por ID
-  for (let i = offset; i < offset + limit; i+=3) {
+  for (let i = offset; i < offset + limit; i++) {
     getPokemonData(i);
   }
   offset += limit;
 
   // Función para cargar Pokémon en lotes
   function loadMorePokemon() {
-    for (let i = offset; i < offset + limit; i+=3) {
+    for (let i = offset; i < offset + limit; i++) {
       if (i > maxPokemon) {
         loadMoreBtn.remove(); // Si no hay más Pokémon, elimina el botón
         return;

@@ -1,12 +1,46 @@
+//Ejecutar luego de cargar la pagina
 window.addEventListener('load', () => {
+  const type = document.title;
   const pokemonContainer = document.getElementById("pokemon-container");
-
-  //Espera que cargue la respuesta de la API
   let loadingPokemon = false;
   let loadingSearch = false;
+  const loadMoreBtn = document.getElementById("load-more");
+  let offset = 1;
+  const limit = 12;
+  let pokemonList = [];
 
-  //Función para obtener los datos de un Pokémon por su ID
-  async function getPokemonData(id) {
+  const pokemonTypes = [
+    "bug", "dark", "dragon", "electric", "fairy", "fighting", "fire", "flying", "ghost", "grass", "ground", "ice", "normal", "poison", "psychic", "rock", "steel", "water"
+  ];
+
+  // Crear los botones para cada tipo de Pokémon
+  const btnsContainer = document.getElementById("btns");
+
+  pokemonTypes.forEach(type => {
+    const button = document.createElement("button");
+    button.classList.add("button");
+    button.id = type;
+    button.textContent = type;
+    const anchor = document.createElement("a");
+    anchor.href = `./${type}.html`;  // Enlace hacia la página correspondiente
+    anchor.appendChild(button);
+    btnsContainer.appendChild(anchor);
+  });
+
+  async function pokemonByType(type) {
+    try {
+      const response = await fetch(`https://pokeapi.co/api/v2/type/${type}`);
+      const data = await response.json();
+      pokemonList = data.pokemon.map(poke => poke.pokemon.name);
+
+      loadNextBatch();
+    } catch (error) {
+      console.error(`Error al obtener Pokémon de tipo ${type}:`, error);
+    }
+  }
+
+  // Función para obtener los datos de un Pokémon por su nombre
+  async function getPokemonData(pokemonName, id) {
     loadingPokemon = true; //Iniciamos el estado de carga
 
     const container = document.createElement("div");
@@ -20,33 +54,32 @@ window.addEventListener('load', () => {
     container.appendChild(loader);
 
     try {
-      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
+      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
       const data = await response.json();
-      //Almacena los datos obtenidos
       const pokemon = {
-        n: id,
+        n: data.id,
         name: data.name,
         image: data.sprites.front_default,
-        types: await Promise.all(data.types.map(type => type.type.name)),
+        types: data.types.map(type => type.type.name),
         abilities: data.abilities.map(ability => ability.ability.name),
         stats: data.stats.map(stat => ({ name: stat.stat.name, baseStat: stat.base_stat })),
-      }
+      };
+
       //Llamar a la función para mostrar estos datos en el HTML
       setTimeout(() => {
-        updatePokemonHTML(id, pokemon);
+        displayPokemon(pokemon, id);
       }, "1500");
     } catch (error) {
-      console.error("Error al obtener datos del Pokemon:", error);
+      console.error(`Error al obtener datos del Pokemon ${pokemonName}:`, error);
     } finally {
-      loadingPokemon = false; //Finaliza el estado de carga
-      //Elimina el elemento de carga
+      loadingPokemon = false; //Finalizamos el estado de carga
       const loadingElementPokemon = document.getElementById(`pokemon-${id}-loading`);
       container.removeChild(loadingElementPokemon);
     }
   }
-
+  
   // Función para mostrar los datos en el HTML
-  function updatePokemonHTML(id, pokemon) {
+  function displayPokemon(pokemon, id) {
     const pokemonElement = document.getElementById(`pokemon-${id}`);
 
     const numberElement = document.createElement("p");
@@ -77,27 +110,17 @@ window.addEventListener('load', () => {
     });
   }
 
-  const loadMoreBtn = document.getElementById("load-more");
-  let offset = 1;
-  const limit = 36;
-  const maxPokemon = 1010;
-
-  //Llamar a la función para obtener los primeros 6 Pokemon por ID
-  for (let i = offset; i < offset + limit; i+=3) {
-    getPokemonData(i);
-  }
-  offset += limit;
-
-  // Función para cargar Pokémon en lotes
-  function loadMorePokemon() {
-    for (let i = offset; i < offset + limit; i+=3) {
-      if (i > maxPokemon) {
-        loadMoreBtn.remove(); // Si no hay más Pokémon, elimina el botón
-        return;
-      }
-      getPokemonData(i);
+  // Cargar los Pokémon en lotes
+  async function loadNextBatch() {
+    if (offset >= pokemonList.length) {
+      loadMoreBtn.remove(); // Ocultar el botón si no hay más Pokémon
+      return;
     }
-    offset += limit;
+
+    const batch = pokemonList.slice(offset, offset + limit); // Obtener el lote de Pokémon
+    batch.forEach((pokemon, index) => getPokemonData(pokemon, offset + index + 1));
+
+    offset += limit; // Mover el offset al siguiente lote
   }
 
   async function searchPokemon() {
@@ -136,7 +159,7 @@ window.addEventListener('load', () => {
 
         // Mostrar los datos en el contenedor
         container.style.display = "block";
-        updatePokemonHTML(0, pokemon);
+        displayPokemon(pokemon, 0);
       } else {
         alert("Por favor, ingresa un nombre de Pokemon valido");
       }
@@ -153,6 +176,8 @@ window.addEventListener('load', () => {
   // Evento para buscar un Pokémon
   document.getElementById("search").addEventListener("click", searchPokemon);
 
-  // Evento para cargar más Pokémon al hacer clic
-  loadMoreBtn.addEventListener("click", loadMorePokemon);
+  // Evento para cargar más Pokémon
+  loadMoreBtn.addEventListener("click", loadNextBatch);
+
+  pokemonByType(type);
 });

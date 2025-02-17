@@ -9,9 +9,8 @@ body {
 }
 
 nav {
-  display: grid;
-  grid-template-columns: 1fr 40% 1fr;
-  align-content: center;
+  display: flex;
+  flex-direction: column;
   padding: 15px 20px;
   position: sticky;
   top: 0;
@@ -41,40 +40,61 @@ a:hover {
   transition: 0.5s;
 }
 
+#first {
+  display: grid;
+  grid-template-columns: 1fr 40% 1fr;
+  align-content: center;
+}
+
+#btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 3px;
+}
+
 button {
   color: white;
   background-color: #79e0ee60;
-  font-weight: bold;
   border: 1px solid #79E0EE;
   border-radius: 3px;
   padding: 5px 10px;
   margin-bottom: 1px;
   cursor: pointer;
-}
-
-.button {
-  width: 100%;
-  font-size: 20px;
-  height: 100px;
   box-shadow: inset 0 0 0 0 #79E0EE;
   -webkit-transition: ease-out 0.4s;
   -moz-transition: ease-out 0.4s;
   transition: ease-out 0.4s;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
 }
 
 button:hover {
   box-shadow: inset 0 100px 0 0 #333333b0;
 }
 
-#types-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  padding: 0px 15px 10px 20px;
+#search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+#pokemon-search {
+  padding: 8px 10px;
+  outline: none;
+  width: 100%;
+  border: 1px solid #79E0EE;
+  border-radius: 5px;
+  background-color: #333333;
+  color: white;
+}
+
+#search {
+  position: absolute;
+  right: 1px;
+  border: none;
+  color: #79E0EE;
+  background-color: #333333;
 }
 
 #normal {
@@ -147,31 +167,6 @@ button:hover {
 
 #fairy {
   background-color: rgba(238, 153, 238, 0.8);
-}
-
-#search-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
-#pokemon-search {
-  padding: 8px 10px;
-  outline: none;
-  width: 100%;
-  border: 1px solid #79E0EE;
-  border-radius: 5px;
-  background-color: #333333;
-  color: white;
-}
-
-#search {
-  position: absolute;
-  right: 1px;
-  border: none;
-  color: #79E0EE;
-  background-color: #333333;
 }
 
 #pokemon-container {

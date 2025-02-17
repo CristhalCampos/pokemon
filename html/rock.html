@@ -3,64 +3,33 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock</title>
+    <title>rock</title>
     <link rel="stylesheet" href="../style.css">
-    <script src="../js/rock.js" defer></script>
+    <script src="../js/pokemon.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   </head>
   <body>
     <nav>
-      <div>
-        <a href="./index.html"><img src="../pokemon-logo.png" alt="logo"></a>
-      </div>
-      <div id="btns">
-        <a href="./fighting.html"><button class="button" id="fighting">Volador</button></a>
-        <a href="./poison.html"><button class="button" id="poison">Veneno</button></a>
-        <a href="./ground.html"><button class="button" id="ground">Tierra</button></a>
-        <a href="./rock.html"><button class="button" id="rock">Roca</button></a>
-        <a href="./bug.html"><button class="button" id="bug">Bicho</button></a>
-        <a href="./ghost.html"><button class="button" id="ghost">Fantasma</button></a>
-        <a href="./steel.html"><button class="button" id="steel">Acero</button></a>
-        <a href="./fire.html"><button class="button" id="fire">Fuego</button></a>
-        <a href="./water.html"><button class="button" id="water">Agua</button></a>
-        <a href="./grass.html"><button class="button" id="grass">Planta</button></a>
-        <a href="./electric.html"><button class="button" id="electric">Eléctrico</button></a>
-        <a href="./psychic.html"><button class="button" id="psychic">Psíquico</button></a>
-        <a href="./ice.html"><button class="button" id="ice">Hielo</button></a>
-        <a href="./dragon.html"><button class="button" id="dragon">Dragon</button></a>
-        <a href="./dark.html"><button class="button" id="dark">Sombra</button></a>
-        <a href="./fairy.html"><button class="button" id="fairy">Hada</button></a>
-      </div>
-      <div id="search-container">
-        <input type="text" id="pokemon-search" placeholder="Nombre del pokemon">
-        <button id="search">Buscar</button>
-      </div>
-      <div id="menu">
-        <button id="❌">❌</button>
-        <div id="btns-phone">
-          <a href="./fighting.html"><button class="button" id="fighting">Volador</button></a>
-          <a href="./poison.html"><button class="button" id="poison">Veneno</button></a>
-          <a href="./ground.html"><button class="button" id="ground">Tierra</button></a>
-          <a href="./rock.html"><button class="button" id="rock">Roca</button></a>
-          <a href="./bug.html"><button class="button" id="bug">Bicho</button></a>
-          <a href="./ghost.html"><button class="button" id="ghost">Fantasma</button></a>
-          <a href="./steel.html"><button class="button" id="steel">Acero</button></a>
-          <a href="./fire.html"><button class="button" id="fire">Fuego</button></a>
-          <a href="./water.html"><button class="button" id="water">Agua</button></a>
-          <a href="./grass.html"><button class="button" id="grass">Planta</button></a>
-          <a href="./electric.html"><button class="button" id="electric">Eléctrico</button></a>
-          <a href="./psychic.html"><button class="button" id="psychic">Psíquico</button></a>
-          <a href="./ice.html"><button class="button" id="ice">Hielo</button></a>
-          <a href="./dragon.html"><button class="button" id="dragon">Dragon</button></a>
-          <a href="./dark.html"><button class="button" id="dark">Sombra</button></a>
-          <a href="./fairy.html"><button class="button" id="fairy">Hada</button></a>
+      <div id="first">
+        <a href="./index.html"><img src="../pngwing.png" alt="logo"></a>
+        <div id="search-container">
+          <input type="text" id="pokemon-search" placeholder="pokemon">
+          <button id="search"><i class="fa-solid fa-magnifying-glass"></button>
         </div>
+        <ul>
+          <li><a href="./index.html">All</a></li>
+          <li><a href="./types.html">Types</a></li>
+          <li><a href="./evolutions.html">Evolutions</a></li>
+        </ul>
       </div>
+      <div id="btns"></div>
     </nav>
-    <div class="pokemon" id="pokemon-0">
-    
-    </div>
+    <div class="pokemon" id="pokemon-0"></div>
     <div id="pokemon-container">
-
+      <!-- Los contenedores de Pokémon serán añadidos dinámicamente -->
+    </div>
+    <div id="more">
+      <button id="load-more">See more</button>
     </div>
   </body>
 </html>
