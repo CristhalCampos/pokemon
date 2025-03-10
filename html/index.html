@@ -6,29 +6,47 @@
     <title>pokemon</title>
     <link rel="stylesheet" href="../style.css">
     <script src="../js/script.js" defer></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="../js/featured.js"></script>
+    <script src="https://kit.fontawesome.com/4f74992fde.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Press+Start+2P&display=swap" rel="stylesheet">
   </head>
   <body>
     <nav>
       <a href="./index.html"><img src="../pngwing.png" alt="logo"></a>
       <div id="search-container">
         <input type="text" id="pokemon-search" placeholder="pokemon">
-        <button id="search"><i class="fa-solid fa-magnifying-glass"></button>
+        <button id="search"><i class="fa-solid fa-magnifying-glass"></i></button>
       </div>
       <ul>
         <li><a href="./all.html">All</a></li>
         <li><a href="./types.html">Types</a></li>
-        <li><a href="./evolutions.html">Evolutions</a></li>
       </ul>
     </nav>
-    <div>
-    </div>
-    <div class="pokemon" id="pokemon-0"></div>
-    <div id="pokemon-container">
-      <!-- Los contenedores de Pokémon serán añadidos dinámicamente -->
-    </div>
-    <div id="more">
-      <button id="load-more">See more</button>
-    </div>
+    <main>
+      <section class="pokemon" id="pokemon-0">
+        <!-- Aquí se agregarán dinámicamente el pokemon buscado -->
+      </section>
+      <section class="section-featured">
+        <h2>Featured</h2>
+        <div class="featured-container">
+          <button class="btn-prev"><i class="fa-solid fa-chevron-left"></i></button>
+          <!-- Contenedor de Pokémon para el slider -->
+          <div class="pokemon-slider">
+            <div class="pokemon-wrapper">
+              <!-- Aquí se agregarán dinámicamente los Pokémon -->
+            </div>
+          </div>
+          <button class="btn-next"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </section>
+      <section id="pokemon-container">
+        <!-- Los contenedores de Pokémon serán añadidos dinámicamente -->
+      </section>
+      <div id="more">
+        <button id="load-more">See more</button>
+      </div>
+    </main>
   </body>
 </html>

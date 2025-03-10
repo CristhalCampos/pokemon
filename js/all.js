@@ -51,19 +51,28 @@ window.addEventListener('load', () => {
 
     const numberElement = document.createElement("p");
     numberElement.textContent = `#${pokemon.n}`;
+    numberElement.classList.add("number");
     pokemonElement.appendChild(numberElement);
 
     const nameElement = document.createElement("h3");
     nameElement.textContent = pokemon.name;
+    nameElement.classList.add("name");
     pokemonElement.appendChild(nameElement);
 
     const imageElement = document.createElement("img");
     imageElement.src = pokemon.image;
     pokemonElement.appendChild(imageElement);
 
-    const typesElement = document.createElement("p");
-    typesElement.textContent = `types: ${pokemon.types.join(', ')}`;
-    pokemonElement.appendChild(typesElement);
+    const typesContainer = document.createElement("div");
+    pokemon.types.forEach(type => {
+      const typeTag = document.createElement("div");
+      typeTag.classList.add("type-tag", type);
+      const typeElement = document.createElement("p");
+      typeElement.textContent = type;
+      typesContainer.appendChild(typeTag);
+      typeTag.appendChild(typeElement);
+    });
+    pokemonElement.appendChild(typesContainer);
 
     const abilitiesElement = document.createElement("p");
     abilitiesElement.textContent = `abilities: ${pokemon.abilities.join(', ')}`;
